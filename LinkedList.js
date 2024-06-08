@@ -229,6 +229,10 @@ linkedList.prepend(30);
 linkedList.insertAt(15, 2);
 linkedList.updateAt(25, 3);
 
+// assignment
+linkedList.removeLast();
+linkedList.append(7);
+
 // 30 -> 15 -> 10 -> null
 linkedList.printList();
 
