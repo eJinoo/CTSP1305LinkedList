@@ -263,18 +263,15 @@ class LinkedList {
 
     //Merge Two Sorted Linked Lists (ASSIGNMENT)
     //1 -> 3 -> 5 and 2 -> 4 -> 6 should become 1 -> 2 -> 3 -> 4 -> 5 -> 6
-    mergeLinkedList(l1,l2){
-        if(!l1){
-           return l2;
-        }
+    mergeLinkedList(l2){
         if(!l2){
-           return l1;
+           return;
         }
   
         let mergeList = new LinkedList();
         let current = mergeList.head;
   
-        let current1 = l1.head;
+        let current1 = this.head;
         let current2 = l2.head
   
         while(current1 && current2){
@@ -339,7 +336,7 @@ linkedList.append(7);
 linkedList.printList();
 linkedList2.printList();
 
-let mergedList = linkedList2.mergeLinkedList(linkedList2, linkedList3);
+let mergedList = linkedList2.mergeLinkedList(linkedList3);
 
 mergedList.printList();
 
