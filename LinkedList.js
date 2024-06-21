@@ -216,13 +216,115 @@ class LinkedList {
         current.data = data; // Update the data that we want.
 
     }
+
+    //Delete the N-th Node from the End (ASSIGNMENT)
+    //1 -> 2 -> 3 -> 4 -> 5 and n = 2 , should return 1 -> 2 -> 3 -> 5
+    deleteFrom(pos){
+        if (pos < 0) {
+            return false;
+        }
+    
+        let current = this.head
+        let index = this.size;
+    
+        if (pos === 0 && current) {
+            this.head = current.next;
+            if (this.head) {
+                this.head.prev = null;
+            } else {
+                this.tail = null;
+            }
+            this.size--;
+            return true;
+        }
+    
+        while (current) {
+            if (index === pos) {
+                if (current.next) {
+                    current.next.prev = current.prev;
+                } else {
+                    this.tail = current.prev;
+                }
+    
+                if (current.prev) {
+                    current.prev.next = current.next;
+                }
+    
+                this.size--;
+                return true;
+            }
+    
+            current = current.next;
+            index--;
+        }
+    
+        return false;
+       }
+
+    //Merge Two Sorted Linked Lists (ASSIGNMENT)
+    //1 -> 3 -> 5 and 2 -> 4 -> 6 should become 1 -> 2 -> 3 -> 4 -> 5 -> 6
+    mergeLinkedList(l1,l2){
+        if(!l1){
+           return l2;
+        }
+        if(!l2){
+           return l1;
+        }
+  
+        let mergeList = new LinkedList();
+        let current = mergeList.head;
+  
+        let current1 = l1.head;
+        let current2 = l2.head
+  
+        while(current1 && current2){
+          if(current1.data <= current2.data){
+              if(!current){
+                  mergeList.head = current1;
+                  current = mergeList.head;
+              } else {
+                  current.next = current1
+                  current = current.next
+              }
+              current1 = current1.next;
+          } else {
+              if(!current){
+                  mergeList.head = current2;
+                  current = mergeList.head;
+              } else {
+                  current.next = current2;
+                  current = current.next;
+              }
+              current2 = current2.next;
+          }
+        }
+      if(current1){
+          current.next = current1;
+      } else {
+          current.next = current2;
+      }
+  
+      return mergeList
+     }
 }
 
 let linkedList = new LinkedList();
 
+let linkedList2 = new LinkedList();
+let linkedList3 = new LinkedList();
+
 // 10 -> null
 // 20 -> 10 -> null
 // 30 -> 20 -> 10 -> null
+linkedList2.append(5);
+linkedList2.append(12);
+linkedList2.append(17);
+linkedList2.append(32);
+
+linkedList3.append(10);
+linkedList3.append(20);
+linkedList3.append(30);
+
 linkedList.prepend(10);
 linkedList.prepend(20);
 linkedList.prepend(30);
@@ -235,6 +337,9 @@ linkedList.append(7);
 
 // 30 -> 15 -> 10 -> null
 linkedList.printList();
+linkedList2.printList();
 
+let mergedList = linkedList2.mergeLinkedList(linkedList2, linkedList3);
 
-// Blockchain
+mergedList.printList();
+
